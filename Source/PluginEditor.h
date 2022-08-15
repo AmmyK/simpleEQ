@@ -158,6 +158,10 @@ struct LookAndFeel : juce::LookAndFeel_V4
                            float rotaryStartAngle,
                            float rotaryEndAngle,
                            juce::Slider&) override;
+    void drawToggleButton (juce::Graphics &g,
+                           juce::ToggleButton & toggleButton,
+                           bool shouldDrawButtonAsHighlighted,
+                           bool shouldDrawButtonAsDown) override;
 };
 
 struct RotarySliderWithLabels : juce::Slider
@@ -256,6 +260,8 @@ private:
 };
 
 //==============================================================================
+struct PowerButton : juce::ToggleButton {};
+struct AnalyzerButton : juce::ToggleButton {};
 /**
 */
 class SimpleEQAudioProcessorEditor  : public juce::AudioProcessorEditor
@@ -296,7 +302,8 @@ private:
                 lowCutSlopeSliderAttachment,
                 highCutSlopeSliderAttachment;
     
-    juce::ToggleButton lowcutBypassButton, peakBypassButton, highcutBypassButton, analyzerEnabledButton;
+    juce::ToggleButton lowcutBypassButton, peakBypassButton, highcutBypassButton;
+    AnalyzerButton analyzerEnabledButton;
     
     using ButtonAttachment = APVTS::ButtonAttachment;
     ButtonAttachment lowcutBypassButtonAttachment,
@@ -305,6 +312,8 @@ private:
                      analyzerEnabledButtonAttachment;
     
     std::vector<juce::Component*> getComps();
+    
+    LookAndFeel lnf;
     
     
 
