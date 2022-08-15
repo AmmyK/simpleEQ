@@ -158,6 +158,8 @@ struct ChainSetting
     float peakFreq{0}, peakGainInDecibels{0}, peakQuality{1.f};
     float lowCutFreq{0}, highCutFreq{0};
     Slope lowCutSlope{ Slope::Slope_12 }, highCutSlope{ Slope::Slope_12 };
+    
+    bool lowCutBypassed { false }, peakBypassed {false}, highCutBypassed {false};
 };
  
 ChainSetting getChainSetting(juce::AudioProcessorValueTreeState& apvts);
@@ -168,7 +170,7 @@ using CutFilter = juce::dsp::ProcessorChain<Filter, Filter, Filter, Filter>;
 
 using MonoChain = juce::dsp::ProcessorChain<CutFilter, Filter, CutFilter>;
 
-enum chainPositions
+enum ChainPositions
 {
   LowCut,
     Peak,
